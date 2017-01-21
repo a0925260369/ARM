@@ -2,7 +2,7 @@
 #include  "UART.h"
 void UART_init(uint32_t baudrate)
 {
-   uint32_t DL_value,Clear=Clear;   // (???????????????Warning)
+   uint32_t DL_value,Clear=Clear;   //
    LPC_SYSCON->SYSAHBCLKCTRL |= (1<<16); //Enables clock for IO configuration block
    LPC_IOCON->PIO1_6 &= ~0x07;
    LPC_IOCON->PIO1_6 |= 0x01; //set P1.6 for RX
@@ -12,12 +12,12 @@ void UART_init(uint32_t baudrate)
    LPC_SYSCON->UARTCLKDIV = 0x1; //UART_PCLK clock divider values.Divide by 1. 
    LPC_SYSCON->SYSAHBCLKCTRL |= (1<<12);//Enables clock for UART
    LPC_UART->LCR = 0x83;   //8-bit character length.Enable access to Divisor Latches.
-   DL_value = SystemFrequency/16/baudrate ;  //
-   LPC_UART->DLM = DL_value / 256;    //?????????
-   LPC_UART->DLL = DL_value % 256;   //?????????
+   DL_value = SystemFrequency/16/baudrate ;  
+   LPC_UART->DLM = DL_value / 256;    
+   LPC_UART->DLL = DL_value % 256;   
    LPC_UART->LCR = 0x03;    //DLAB set 0
    LPC_UART->FCR = 0x07;    //Enable FIFO.clear all bytes in UART TX FIFO and RX.
-   Clear = LPC_UART->LSR;   //?UART????????????
+   Clear = LPC_UART->LSR;  
 }
 uint8_t UART_recive(void)
 {
